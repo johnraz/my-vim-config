@@ -1,5 +1,3 @@
-Quickly install with:
-
-    git clone git://github.com/msanders/snipmate.vim.git
-	cd snipmate.vim
-	cp -R * ~/.vim
+This is my own customization of vim.
+(Most of them discovered on http://net.tutsplus.com/ in the vim series.
+I started building this one from https://github.com/JeffreyWay/My-Vim-Repo)

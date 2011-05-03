@@ -1,6 +1,3 @@
- To install this on your own system, paste the following into the Terminal. 
-
- git clone https://github.com/JeffreyWay/My-Vim-Repo ~/.vim
- ln -s ~/.vim/vimrc ~/.vim
-
- ...That's it. Let me know if you have any questions!
+This is my own customization of vim.
+(Most of them discovered on http://net.tutsplus.com/ in the vim series.
+I started building this one from https://github.com/JeffreyWay/My-Vim-Repo)
