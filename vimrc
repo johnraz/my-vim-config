@@ -216,3 +216,4 @@ end
 "Automatically saves/loads the folding and view settings
 au BufWinLeave * mkview
 au BufWinEnter * silent loadview
+set foldcolumn=1
