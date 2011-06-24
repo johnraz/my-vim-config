@@ -34,7 +34,7 @@ set hidden
 colorscheme molokai
 
 "Set font type and size. Depends on the resolution. Larger screens, prefer h15
-set guifont=Monaco:h18
+set guifont=Monaco:h15
 
 "Tab stuff
 set tabstop=3
@@ -125,7 +125,7 @@ map ,c <c-_><c-_>
 nmap <space> :
 
 "Automatically change current directory to that of the file in the buffer
-" autocmd BufEnter * cd %:p:h
+autocmd BufEnter * cd %:p:h
 
 "Map code completion to , + tab
 imap ,<tab> <C-x><C-o>
@@ -171,6 +171,11 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+"
+" easier tab navigation
+nmap <C-S-TAB> <esc>:tabp<cr>
+nmap <C-TAB> <esc>:tabn<cr>
+
 "------------------------"
 "NERDTREE PLUGIN SETTINGS
 "------------------------"
@@ -208,11 +213,16 @@ nmap ,theme :Nread ftp://jeff-way.com@jeffrey-way.com/domains/jeffrey-way.com/ht
 "let g:acp_behaviorSnipmateLength = 1
 
 "Peep open
-if has("gui_macvim")
-  macmenu &File.New\ Tab key=<nop>
-  map <c-o> <Plug>PeepOpen
-end
+"if has("gui_macvim")
+ " macmenu &File.New\ Tab key=<nop>
+ " map <c-o> <Plug>PeepOpen
+"end
 
 "Automatically saves/loads the folding and view settings
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+"au BufWinLeave * mkview
+"au BufWinEnter * silent loadview
+set foldcolumn=1
+
+set fileformats=dos,unix
+
+map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>

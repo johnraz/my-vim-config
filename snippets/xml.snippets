@@ -1,0 +1,404 @@
+snippet <?
+	<?xml version="1.0" encoding="UTF-8"?>
+snippet oerp
+	<openerp>
+	    <data>
+	    $0
+	    </data>
+	</openerp>
+snippet field <field ... />
+	<field name="${1:Field}"/>
+snippet field <field ... ></field>
+	<field name="${1:Field}">${2:Value}</field>
+snippet field <field ... colspan ... />
+	<field name="${1:Field}" colspan="${2:4}"/>
+snippet field <field ... colspan ... col ... />
+	<field name="${1:Field}" colspan="${2:4}" col="${3:4}"/>
+snippet field <field ref="xxx"... />
+	<field name="${1:Field}" ref="${2:ir_model_data}"/>
+snippet button
+	<button string="${1:Validate}" states="${2:draft}" type="${3:object}" name="${4:to_validate}"/>
+snippet domain
+	domain="[('${1:state}','${2:=}', ${3:True})]"
+snippet context
+	context="{}"
+snippet attrs required
+	attrs="{'${1:required}': [('${2:state}','${3:=}', ${4:'value'})]}"
+snippet attrs readonly
+	attrs="{'${1:readonly}': [('${2:state}','${3:=}', ${4:'value'})]}"
+snippet attrs invisible
+	attrs="{'${1:invisible}': [('${2:state}','${3:=}', ${4:'value'})]}"
+snippet select
+	select="1"
+snippet type object
+	type="object"
+snippet type action
+	type="action"
+snippet type workflow
+	type="workflow"
+snippet onchange
+	on_change="onchange_${1:method}(${1:argument}, context=context)"
+snippet on_change
+	on_change="onchange_${1:method}(${1:argument}, context=context)"
+snippet sep
+	<separator string="${1:Label}" colspan="${2:4}"/>
+snippet separator
+	<separator string="${1:Label}" colspan="${2:4}"/>
+snippet group
+	<group colspan="${1:4}">
+	    $0
+	</group>
+snippet notebook
+	<notebook colspan="4">
+	    <page string="${1:Label}">
+		$0
+	    </page>
+	</notebook>
+snippet page
+	<page string="${1:Label}">
+	    $0
+	</page>
+snippet label
+	<label string="${1:Label}"/>
+snippet newline
+	<newline/>
+snippet record
+	<record id="${1:ir_model_data}" model="${2:Model}">
+	    $0
+	</record>
+snippet ref
+	ref="${1:ir_model_data}"
+snippet eval
+	eval="${1:Value}"
+snippet nol
+	nolabel="1" ${1}
+snippet nolabel
+	nolabel="1" ${0}
+snippet readonly
+	readonly="1" ${1}
+snippet required
+	required="1"
+snippet invisible
+	invisible="1"
+snippet pos
+	position="${1:inside}"
+snippet position
+	position="${1:inside}"
+snippet mode
+	mode="tree,form"
+snippet colspan
+	colspan="4"
+snippet col
+	col="4"
+snippet colors
+	colors="${1:grey}:${2:state}${3:==}'${4:draft}'${5:,}"
+snippet editable top
+	editable="top"
+snippet editable bottom
+	editable="bottom"
+snippet focus
+	default_focus="1"
+snippet tree
+	<tree string="${1:Label}">
+	    $0
+	</tree>
+snippet form
+	<form string="${1:Label}">
+	    $0
+	</form>
+snippet menuitem Action
+	<menuitem id="menu_${1:ir_model_data}" 
+	    parent="menu_${2:menu_parent}"
+	    sequence="${3:20}"
+	    action="action_${4:Action}"/>
+snippet menuitem Name
+	<menuitem id="menu_${1:ir_model_data}" 
+	    parent="menu_${2:menu_parent}"
+	    sequence="${3:20}"
+	    name="${4:Label}"/>
+snippet wizard <wizard/>
+	<wizard id="wizard_${1:name}"
+	    string="${2:label}"
+	    model="${3:ir.model}"
+	    name="${4:wizard_name}"/>
+snippet wizard osv_memory
+	<record id="view_${1:model}_form" model="ir.ui.view">
+	    <field name="name">$2.form</field>
+	    <field name="model">${2:Model}</field>
+	    <field name="type">form</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<form string="${3:Label}">
+		    <field name="${4:name}" select="1"/>
+		</form>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="action_$1_view">
+	    <field name="name">$3</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">$2</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">form</field>
+	    <field name="domain">[]</field>
+	    <field name="context">{}</field>
+	    <field name="target">new</field>
+	</record>
+	
+	<record model="ir.values" id="wizard_$1">
+	    <field name="name">$3</field>
+	    <field name="object" eval="1"/>
+	    <field name="key">action</field>
+	    <field name="key2">client_action_multi</field>
+	    <field name="model_id" ref="${5:ir_model_data}"/>
+	    <field name="model">$2</field>
+	    <field name="value" eval="'ir.actions.act_window,' + str(ref('action_$1_view'))" />
+	</record>
+snippet view form
+	<record id="view_${1:model}_form" model="ir.ui.view">
+	    <field name="name">$2.form</field>
+	    <field name="model">${2:Model}</field>
+	    <field name="type">form</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<form string="${3:Label}">
+		    <field name="${4:name}" select="1"/>
+		</form>
+	    </field>
+	</record>
+snippet view tree
+	<record id="view_${1:model}_tree" model="ir.ui.view">
+	    <field name="name">$2.tree</field>
+	    <field name="model">${2:Model}</field>
+	    <field name="type">tree</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<tree string="${3:Label}">
+		    <field name="${4:name}"/>
+		</tree>
+	    </field>
+	</record>
+snippet view search
+	<record id="view_${1:model}_search" model="ir.ui.view">
+	    <field name="name">$2.search</field>
+	    <field name="model">${2:Model}</field>
+	    <field name="type">search</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<search string="${3:Label}">
+		    <field name="${4:name}" select="True"/>
+		</search>
+	    </field>
+	</record>
+snippet view both (tree, form)
+	<record id="view_${1:model}_tree" model="ir.ui.view">
+	    <field name="name">$2.tree</field>
+	    <field name="model">${2:Model}</field>
+	    <field name="type">tree</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<tree string="${3:Label}">
+		    <field name="${4:name}"/>
+		</tree>
+	    </field>
+	</record>
+	
+	<record id="view_$1_form" model="ir.ui.view">
+	    <field name="name">$2.form</field>
+	    <field name="model">$2</field>
+	    <field name="type">form</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<form string="$3">
+		    <field name="$4" select="1"/>
+		</form>
+	    </field>
+	</record>
+snippet view both (tree, form, search)
+	<record id="view_${1:model}_tree" model="ir.ui.view">
+	    <field name="name">$2.tree</field>
+	    <field name="model">${2:Model}</field>
+	    <field name="type">tree</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<tree string="${3:Label}">
+		    <field name="${4:name}"/>
+		</tree>
+	    </field>
+	</record>
+	
+	<record id="view_$1_form" model="ir.ui.view">
+	    <field name="name">$2.form</field>
+	    <field name="model">$2</field>
+	    <field name="type">form</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<form string="$3">
+		    <field name="$4" select="1"/>
+		</form>
+	    </field>
+	</record>
+	<record id="view_$1_search" model="ir.ui.view">
+	    <field name="name">$2.search</field>
+	    <field name="model">$2</field>
+	    <field name="type">search</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<search string="$3">
+		    <field name="$4" select="True"/>
+		</search>
+	    </field>
+	</record>
+snippet view both (tree, form) + Action + Menu
+	<record id="view_${1:model}_tree" model="ir.ui.view">
+	    <field name="name">$2.tree</field>
+	    <field name="model">${2:Model}</field>
+	    <field name="type">tree</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<tree string="${3:Label}">
+		    <field name="${4:name}"/>
+		</tree>
+	    </field>
+	</record>
+	
+	<record id="view_$1_form" model="ir.ui.view">
+	    <field name="name">$2.form</field>
+	    <field name="model">$2</field>
+	    <field name="type">form</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<form string="$3">
+		    <field name="$4" select="1"/>
+		</form>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="act_open_$1_view">
+	    <field name="name">$3</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">$2</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="domain">[]</field>
+	    <field name="context">{}</field>
+	</record>
+	
+	<record model="ir.actions.act_window.view" id="act_open_$1_view_form">
+	    <field name="act_window_id" ref="act_open_$1_view"/>
+	    <field name="sequence" eval="20"/>
+	    <field name="view_mode">form</field>
+	    <field name="view_id" ref="view_$1_form"/>
+	</record>
+	
+	<record model="ir.actions.act_window.view" id="act_open_$1_view_tree">
+	    <field name="act_window_id" ref="act_open_$1_view"/>
+	    <field name="sequence" eval="10"/>
+	    <field name="view_mode">tree</field>
+	    <field name="view_id" ref="view_$1_tree"/>
+	</record>
+
+	<menuitem id="menu_$1"
+	    parent="${5:module.xmlid}"
+	    sequence="20"
+	    action="act_open_$1_view"/>
+snippet view both (tree, form, search) + Action + Menu
+	<record id="view_${1:model}_tree" model="ir.ui.view">
+	    <field name="name">$2.tree</field>
+	    <field name="model">${2:Model}</field>
+	    <field name="type">tree</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<tree string="${3:Label}">
+		    <field name="${4:name}"/>
+		</tree>
+	    </field>
+	</record>
+	
+	<record id="view_$1_form" model="ir.ui.view">
+	    <field name="name">$2.form</field>
+	    <field name="model">$2</field>
+	    <field name="type">form</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<form string="$3">
+		    <field name="$4" select="1"/>
+		</form>
+	    </field>
+	</record>
+	
+	<record id="view_$1_search" model="ir.ui.view">
+	    <field name="name">$2.search</field>
+	    <field name="model">$2</field>
+	    <field name="type">search</field>
+	    <field name="priority" eval="8"/>
+	    <field name="arch" type="xml">
+		<search string="$3">
+		    <field name="$4" select="True"/>
+		</search>
+	    </field>
+	</record>
+	
+	<record model="ir.actions.act_window" id="act_open_$1_view">
+	    <field name="name">$3</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">$2</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="search_view_id" ref="view_$1_search"/>
+	    <field name="domain">[]</field>
+	    <field name="context">{}</field>
+	</record>
+	
+	<record model="ir.actions.act_window.view" id="act_open_$1_view_form">
+	    <field name="act_window_id" ref="act_open_$1_view"/>
+	    <field name="sequence" eval="20"/>
+	    <field name="view_mode">form</field>
+	    <field name="view_id" ref="view_$1_form"/>
+	</record>
+	
+	<record model="ir.actions.act_window.view" id="act_open_$1_view_tree">
+	    <field name="act_window_id" ref="act_open_$1_view"/>
+	    <field name="sequence" eval="10"/>
+	    <field name="view_mode">tree</field>
+	    <field name="view_id" ref="view_$1_tree"/>
+	</record>
+
+	<menuitem id="menu_$1"
+	    parent="${5:module.xmlid}"
+	    sequence="20"
+	    action="act_open_$1_view"/>
+snippet act_window
+	<act_window id="act_${1:ir_model_data}"
+	    name="${2:Name}"
+	    res_model="${3:destination_model}"
+	    src_model="${4:source_model}"
+	    domain="[('${5:field}', '${6:operator}', ${7:active_id})]"/>
+snippet xpath
+	<xpath expr="/${1:form}" position="${2:after}">
+	    <field name="${3:name}"/>
+	</xpath>
+snippet widget selection
+	widget="selection"
+snippet widget float_time
+	widget="float_time"
+snippet test <test expr=""/>
+	<test expr="len(${1:one2many}) == ${2:1}"/>
+snippet test <test expr=""></test>
+	<test expr="${1:state}">${2:confirmed}</test>
+snippet assert id
+	<assert id="${1:ir_model_data}" model="${2:sale.order}" severity="${3:error}"
+	        string="${4:Text appear when an error raise}">
+		$0
+	</assert>
+snippet assert search
+	<assert search="[('${1:name}','${2:=}','${3:TEXT}')]" model="${4:sale.order}" severity="${5:error}" count="${6:1}"
+	        string="${7:Text appear when an error raise}">
+		$0
+	</assert>
+snippet workflow ref
+	<workflow action="${1:button_confirm}" model="${2:sale.order}" ref="${3:ir_model_data}"/>
+snippet workflow search
+	<workflow action="${1:button_confirm}" model="${2:sale.order}">
+	    <value model="$2" search="[('${3:name}','${4:=}','${5:TEXT}')]"/>
+	</worklow>
