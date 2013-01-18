@@ -7,9 +7,6 @@
 "Forget compatibility with Vi. Who cares.
 set nocompatible
 
-"Exec pathogen plugin manager
-execute pathogen#infect()
-
 "Enable filetypes
 filetype on
 filetype plugin on
@@ -37,7 +34,7 @@ set hidden
 colorscheme molokai
 
 "Set font type and size. Depends on the resolution. Larger screens, prefer h15
-set guifont=Monaco\ 10 
+set guifont=Monaco:h15
 
 "Tab stuff
 set tabstop=3
@@ -222,6 +219,7 @@ nmap ,theme :Nread ftp://jeff-way.com@jeffrey-way.com/domains/jeffrey-way.com/ht
 "end
 
 "Automatically saves/loads the folding and view settings
+<<<<<<< HEAD
 "au BufWinLeave * mkview
 "au BufWinEnter * silent loadview
 set foldcolumn=1
@@ -229,6 +227,8 @@ set foldcolumn=1
 set fileformats=dos,unix
 
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
+=======
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
+set foldcolumn=1
+>>>>>>> 0b3c3bc7f054c79f73afd7076668904352373bb8
