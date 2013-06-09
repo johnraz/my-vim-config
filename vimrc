@@ -23,7 +23,7 @@ set autowrite
 set ruler
 
 "Want a different map leader than \
-"set mapleader = ",";
+set mapleader = ","
 
 "Ever notice a slight lag after typing the leader key + command? This lowers
 "the timeout.
@@ -40,10 +40,14 @@ colorscheme molokai
 set guifont=Monaco\ 10 
 
 "Tab stuff
-set tabstop=3
-set shiftwidth=3
-set softtabstop=3
+set tabstop=4
+set shiftwidth=4
+set shiftround
+set softtabstop=4
 set expandtab
+
+"Show matching braces
+set showmatch
 
 "Show command in bottom right portion of the screen
 set showcmd
@@ -91,6 +95,8 @@ set foldenable
 "Hide mouse when typing
 set mousehide
 
+set mouse=a
+
 "Shortcut to fold tags with leader (usually \) + ft
 nnoremap <leader>ft Vatzf
 
@@ -133,11 +139,15 @@ autocmd BufEnter * cd %:p:h
 "Map code completion to , + tab
 imap ,<tab> <C-x><C-o>
 
+"Path autocomplete to , + p
+imap ,p <C-X><C-F>
+
 " More useful command-line completion
-" set wildmenu
+set wildmenu
 
 "Auto-completion menu
 " set wildmode=list:longest
+set wildmode=longest:full,list:full
 
 "http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 " set completeopt=longest,menuone
@@ -189,8 +199,8 @@ nmap ,nt :NERDTreeToggle
 let NERDTreeShowHidden=1
 
 "autopen NERDTree and focus cursor in new document
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+"autocmd VimEnter * NERDTree
+"autocmd VimEnter * wincmd p
 
 "Helpeful abbreviations
 iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -232,3 +242,19 @@ map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 
 "source $VIMRUNTIME/mswin.vim
 "behave mswin
+
+set history=1000
+set undolevels=1000
+set wildignore=*.swp,*.bak,*.pyc,*.class
+set title
+set nobackup
+set noswapfile
+
+set pastetoggle=<F2>
+set clipboard=unnamed
+
+cmap w!! w !sudo tee % >/dev/null
+nmap <silent> ,/ :nohlsearch<CR>
+
+set backspace=2 
+set backspace=indent,eol,start
