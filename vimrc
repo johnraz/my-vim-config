@@ -1,260 +1,218 @@
-" .vimrc File
-" Maintained by: Jeffrey Way
-" jeffrey@jeffrey-way.com
-" http://net.tutsplus.com
-"
+" Sample .vimrc file by Martin Brochhaus
+" Presented at PyCon APAC 2012
 
-"Forget compatibility with Vi. Who cares.
-set nocompatible
 
-"Exec pathogen plugin manager
-execute pathogen#infect()
+" Automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
 
-"Enable filetypes
-filetype on
-filetype plugin on
-filetype indent on
-syntax on
 
-"Write the old file out when switching between files.
-set autowrite
-
-"Display current cursor position in lower right corner.
-set ruler
-
-"Want a different map leader than \
-set mapleader = ","
-
-"Ever notice a slight lag after typing the leader key + command? This lowers
-"the timeout.
-set timeoutlen=500
-
-"Switch between buffers without saving
-set hidden
-
-"Set the color scheme. Change this to your preference. 
-"Here's 100 to choose from: http://www.vim.org/scripts/script.php?script_id=625
-colorscheme molokai
-
-"Set font type and size. Depends on the resolution. Larger screens, prefer h15
-set guifont=Monaco\ 10 
-
-"Tab stuff
-set tabstop=4
-set shiftwidth=4
-set shiftround
-set softtabstop=4
-set expandtab
-
-"Show matching braces
-set showmatch
-
-"Show command in bottom right portion of the screen
-set showcmd
-
-"Show lines numbers
-set number
-
-"Prefer relative line numbering?
-"set relativenumber"
-
-"Indent stuff
-set smartindent
-set autoindent
-
-"Always show the status line
-set laststatus=2
-
-"Prefer a slightly higher line height
-set linespace=3
-
-"Better line wrapping 
-set wrap
-set textwidth=79
-set formatoptions=qrn1
-
-"Set incremental searching"
-set incsearch
-
-"Highlight searching
-set hlsearch
-
-" case insensitive search
-set ignorecase
-set smartcase
-
-"Hide MacVim toolbar by default
-set go-=T
-
-"Hard-wrap paragraphs of text
-nnoremap <leader>q gqip
-
-"Enable code folding
-set foldenable
-
-"Hide mouse when typing
-set mousehide
-
-set mouse=a
-
-"Shortcut to fold tags with leader (usually \) + ft
-nnoremap <leader>ft Vatzf
-
-" Create dictionary for custom expansions
-set dictionary+=/Users/Home/.vim/dict.txt
-
-"Opens a vertical split and switches over (\v)
-nnoremap <leader>v <C-w>v<C-w>l
-
-"Split windows below the current window.
-set splitbelow              
-
-"Session settings
-set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
-
-"Set up an HTML5 template for all new .html files
-"autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
-
-"Load the current buffer in Firefox - Mac specific.
-abbrev ff :! open -a firefox.app %:p<cr>
-
-"Map a change directory to the desktop - Mac specific
-nmap ,d :cd ~/Desktop<cr>:e.<cr>
-
-"Shortcut for editing  vimrc file in a new tab
-nmap ,ev :tabedit $MYVIMRC<cr>
-
-"Change zen coding plugin expansion key to shift + e
-let g:user_zen_expandabbr_key = '<C-e>'
-
-"Faster shortcut for commenting. Requires T-Comment plugin
-map ,c <c-_><c-_>
-
-"Saves time; maps the spacebar to colon
-nmap <space> :
-
-"Automatically change current directory to that of the file in the buffer
-autocmd BufEnter * cd %:p:h
-
-"Map code completion to , + tab
-imap ,<tab> <C-x><C-o>
-
-"Path autocomplete to , + p
-imap ,p <C-X><C-F>
-
-" More useful command-line completion
-set wildmenu
-
-"Auto-completion menu
-" set wildmode=list:longest
-set wildmode=longest:full,list:full
-
-"http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-" set completeopt=longest,menuone
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-"   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-"   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-"Map escape key to jj -- much faster
-imap jj <esc>
-
-"Delete all buffers (via Derek Wyatt)
-nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
-
-"Bubble single lines (kicks butt)
-"http://vimcasts.org/episodes/bubbling-text/
-nmap <C-Up> ddkP
-nmap <C-Down> ddp
-
-"Bubble multiple lines
-vmap <C-Up> xkP`[V`]
-vmap <C-Down> xp`[V`]
-
-" Source the vimrc file after saving it. This way, you don't have to reload
-" Vim to see the changes.
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
-"
-" easier window navigation
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
-
-"
-" easier tab navigation
-nmap <C-S-TAB> <esc>:tabp<cr>
-nmap <C-TAB> <esc>:tabn<cr>
-
-"------------------------"
-"NERDTREE PLUGIN SETTINGS
-"------------------------"
-"Shortcut for NERDTreeToggle
-nmap ,nt :NERDTreeToggle
-
-"Show hidden files in NerdTree
-let NERDTreeShowHidden=1
-
-"autopen NERDTree and focus cursor in new document
-"autocmd VimEnter * NERDTree
-"autocmd VimEnter * wincmd p
-
-"Helpeful abbreviations
-iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-
-"Spelling corrects. Just for example. Add yours below.
-iab teh the
-iab Teh The
-
-"--------------------------"
-" PERSONAL SETTINGS 
-" -------------------------"
-"Example for adding abbreviations - triggered by the spacebar.
-iabbrev mysite ftp://jeff-way.com@jeffrey-way.com/domains/
-
-"Shortcut for logging into my server
-nmap ,server :Nread ftp://jeff-way.com@jeffrey-way.com/domains/<cr>
-
-"Shortcut directly to my theme files on server
-nmap ,theme :Nread ftp://jeff-way.com@jeffrey-way.com/domains/jeffrey-way.com/html/wp-content/themes/magazineJW/<cr>
-
-"For autocompletion of Snipmate plugin
-"let g:acp_behaviorSnipmateLength = 1
-
-"Peep open
-"if has("gui_macvim")
- " macmenu &File.New\ Tab key=<nop>
- " map <c-o> <Plug>PeepOpen
-"end
-
-"Automatically saves/loads the folding and view settings
-"au BufWinLeave * mkview
-"au BufWinEnter * silent loadview
-set foldcolumn=1
-
-set fileformats=dos,unix
-
-map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
-
-set history=1000
-set undolevels=1000
-set wildignore=*.swp,*.bak,*.pyc,*.class
-set title
-set nobackup
-set noswapfile
+" Better copy & paste
+" When you want to paste large blocks of code into vim, press F2 before you
+" paste. At the bottom you should see ``-- INSERT (paste) --``.
 
 set pastetoggle=<F2>
 set clipboard=unnamed
 
-cmap w!! w !sudo tee % >/dev/null
-nmap <silent> ,/ :nohlsearch<CR>
 
-set backspace=2 
-set backspace=indent,eol,start
+" Mouse and backspace
+set mouse=r  " on OSX press ALT and click
+set bs=2     " make backspace behave like normal again
+
+
+" Rebind <Leader> key
+" I like to have it here becuase it is easier to reach than the default and
+" it is next to ``m`` and ``n`` which I use for navigating between tabs.
+let mapleader = ","
+
+
+" Bind nohl
+" Removes highlight of your last search
+" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+inoremap <C-n> :nohl<CR>
+
+
+" Quicksave command
+noremap <C-S> :update<CR>
+vnoremap <C-S> <C-C>:update<CR>
+inoremap <C-S> <C-O>:update<CR>
+
+
+" Quick quit command
+"" noremap <Leader>e :quit<CR>  " Quit current window
+"" noremap <Leader>E :qa!<CR>   " Quit all windows
+
+
+" bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
+" Every unnecessary keystroke that can be saved is good for your health :)
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+
+" easier moving between tabs
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
+
+
+" map sort function to a key
+vnoremap <Leader>s :sort<CR>
+
+
+" easier moving of code blocks
+" Try to go into visual mode (v), thenselect several lines of code here and
+" then press ``>`` several times.
+vnoremap < <gv  " better indentation
+vnoremap > >gv  " better indentation
+
+
+" Show whitespace
+" MUST be inserted BEFORE the colorscheme command
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertLeave * match ExtraWhitespace /\s\+$/
+
+
+" Color scheme
+" mkdir -p ~/.vim/colors && cd ~/.vim/colors
+" wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
+set t_Co=256
+color wombat256mod
+
+
+" Enable syntax highlighting
+" You need to reload this file for the change to apply
+filetype off
+filetype plugin indent on
+syntax on
+
+
+" Showing line numbers and length
+set number  " show line numbers
+set tw=79   " width of document (used by gd)
+set nowrap  " don't automatically wrap on load
+set fo-=t   " don't automatically wrap text when typing
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
+
+
+" easier formatting of paragraphs
+vmap Q gq
+nmap Q gqap
+
+
+" Useful settings
+set history=700
+set undolevels=700
+
+
+" Real programmers don't use TABs but spaces
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
+
+
+" Make search case insensitive
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+
+" Disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+
+
+" Setup Pathogen to manage your plugins
+" mkdir -p ~/.vim/autoload ~/.vim/bundle
+" curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
+" Now you can install any plugin into a .vim/bundle/plugin-name/ folder
+call pathogen#infect()
+
+
+" ============================================================================
+" Python IDE Setup
+" ============================================================================
+
+
+" Settings for vim-powerline
+" cd ~/.vim/bundle
+" git clone git://github.com/Lokaltog/vim-powerline.git
+set laststatus=2
+
+
+" Settings for ctrlp
+" cd ~/.vim/bundle
+" git clone https://github.com/kien/ctrlp.vim.git
+let g:ctrlp_max_height = 30
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=*/coverage/*
+
+
+" Settings for python-mode
+" Note: I'm no longer using this. Leave this commented out
+" and uncomment the part about jedi-vim instead
+" cd ~/.vim/bundle
+" git clone https://github.com/klen/python-mode
+map <Leader>g :call RopeGotoDefinition()<CR>
+let ropevim_enable_shortcuts = 1
+let g:pymode_rope_goto_def_newwin = "vnew"
+let g:pymode_rope_extended_complete = 1
+let g:pymode_breakpoint = 0
+let g:pymode_syntax = 1
+let g:pymode_syntax_builtin_objs = 0
+let g:pymode_syntax_builtin_funcs = 0
+map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+
+" Settings for jedi-vim
+" cd ~/.vim/bundle
+" git clone git://github.com/davidhalter/jedi-vim.git
+let g:jedi#related_names_command = "<leader>z"
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+
+" Better navigating through omnicomplete option list
+" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
+set completeopt=longest,menuone
+function! OmniPopup(action)
+    if pumvisible()
+        if a:action == 'j'
+            return "\<C-N>"
+        elseif a:action == 'k'
+            return "\<C-P>"
+        endif
+    endif
+    return a:action
+endfunction
+
+inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+
+
+" Python folding
+" mkdir -p ~/.vim/ftplugin
+" wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
+set nofoldenable
+
+set rtp+=/home/jonathan/github/powerline/bindings/vim
+
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
+
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
